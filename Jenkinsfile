@@ -10,7 +10,7 @@ pipeline {
             	bat 'dir'
             	bat "mkdir target"
                 bat "cd target"
-                bat "copy ../*txt ."
+                bat "copy *.txt target"
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
                 bat "git checkout development"
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'bb6b58d8-95ee-4709-966e-09d702139ebd', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
