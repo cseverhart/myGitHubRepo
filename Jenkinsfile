@@ -4,8 +4,9 @@ pipeline {
         stage('build') {
             steps {	
                 checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
+                bat "git pull"
                 bat "git checkout myFirstPipeline"
-                bat 'c:/python27/python ../PythonProjects/src/TestModule1.py'
+                bat 'c:/python27/python ./PythonProjects/src/TestModule1.py'
             	bat 'dir'
             	bat "mkdir target"
                 bat "cd target"
