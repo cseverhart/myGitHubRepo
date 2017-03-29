@@ -3,16 +3,21 @@ pipeline {
     stages {
         stage('build') {
             steps {	
-               checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
                 bat "git checkout myFirstPipeline"
-                bat 'c:/python27/python ./PythonProjects/src/TestModule1.py'
+                bat 'c:/python27/python ../PythonProjects/src/TestModule1.py'
             	bat 'dir'
+            	bat "mkdir target"
+                bat "cd target"
+                bat "cp ../*txt ."
+                checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
+                bat "git checkout development"
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'bb6b58d8-95ee-4709-966e-09d702139ebd', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
 				    bat 'git config --global user.name "scott everhart"'
 				    bat 'git config --global user.email "scott.everhart1@gmail.com"'
-				    bat "git pull origin myFirstPipeline"
+				    bat "git pull origin development"
 				    bat "git add *.txt"
-				    bat "git tag -a \"tag_name_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
+				    bat "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
 				    bat "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 				    bat "git push --tags"
 				}
