@@ -18,7 +18,7 @@ pipeline {
 				    bat 'git config --global user.name "scott everhart"'
 				    bat 'git config --global user.email "scott.everhart1@gmail.com"'
 				    bat "git pull origin development"
-				    bat "copy ${env.WORKSPACE}/output_${env.BUILD_NUMBER}/*.txt ."
+				    bat "copy ${env.WORKSPACE}/output_${env.BUILD_NUMBER}/*.txt"
 				    bat "git add *.txt"
 				    bat "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
 				    bat "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
