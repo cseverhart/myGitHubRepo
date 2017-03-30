@@ -8,6 +8,7 @@ pipeline {
                 bat "git checkout myFirstPipeline"
                 bat 'c:/python27/python ./PythonProjects/src/TestModule1.py'
             	bat "dir"
+            	bat "cd"
             	bat "mkdir output_${env.BUILD_NUMBER}"
                 bat "cd output_${env.BUILD_NUMBER}"
                 bat "cd"
