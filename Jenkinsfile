@@ -21,7 +21,7 @@ pipeline {
 				    bat "cd"
 				    bat "copy \"${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt\" ."
 				    bat "cd"
-				    bat "git add ${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt"
+				    bat "git add *.txt"
 				    bat "cd"
 				    bat "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
 				    bat "cd"
