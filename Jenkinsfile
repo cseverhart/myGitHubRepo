@@ -8,10 +8,13 @@ pipeline {
                 bat "git checkout myFirstPipeline"
                 bat 'c:/python27/python ./PythonProjects/src/TestModule1.py'
             	bat 'dir'
+            	bat "rmdir /s /q output*"
+            	bat "dir"
             	bat "mkdir output_${env.BUILD_NUMBER}"
                 bat "cd output_${env.BUILD_NUMBER}"
+                bat "cd"
                 bat "copy *.txt output_${env.BUILD_NUMBER}"
-                //bat "dir"
+                bat "dir"
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
                 bat "git checkout development"
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'bb6b58d8-95ee-4709-966e-09d702139ebd', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
