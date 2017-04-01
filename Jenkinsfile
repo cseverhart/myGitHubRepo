@@ -1,11 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('scm_checkout') {
             steps {	
                 checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
-                bat "git pull --all"
-                bat "git checkout myFirstPipeline"
+            }
+         }
+         stage('scm_repull') {
+            steps {
+                 bat "git pull --all"
+                 bat "git checkout myFirstPipeline"
+            }
+         }
+         stage('Run_python') {
+            steps {
                 bat 'c:/python27/python ./PythonProjects/src/TestModule1.py'
             	bat "dir"
             	bat "cd"
@@ -14,6 +22,10 @@ pipeline {
                 bat "cd"
                 bat "copy *.txt output_${env.BUILD_NUMBER}"
                 bat "dir"
+             }
+          }
+          stage('scm_push') {
+             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
                 bat "git checkout development"
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'bb6b58d8-95ee-4709-966e-09d702139ebd', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
@@ -30,10 +42,14 @@ pipeline {
 				    bat "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 				    bat "git push --tags"
 				}
+		      }
+		   }
+		   stage('Approval') {
+		      steps {
             	input message: 'Approval required to begin gitTest build', ok: 'Approve', submitterParameter: 'ApprovingSubmitter'
             	build 'gitTest'
-           	}
-        }
+              }
+           }
     }
 	post {
         always {
