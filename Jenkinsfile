@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage('scm_checkout') {
             steps {	
-                checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/feature-test-1']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' bb6b58d8-95ee-4709-966e-09d702139ebd', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
             }
          }
          stage('scm_repull') {
             steps {
                  bat "git pull --all"
-                 bat "git checkout myFirstPipeline"
+                 bat "git checkout feature-test-1"
             }
          }
          stage('Run_python') {
