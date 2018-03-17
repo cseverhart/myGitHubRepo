@@ -1,5 +1,4 @@
 pipeline {
-#test comment
     agent any
     stages {
         stage('scm_checkout') {
