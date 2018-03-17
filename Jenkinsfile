@@ -1,7 +1,9 @@
 pipeline {
     agent any
     stages {
-    // test
+         stage('start_pipeline') {
+            sh 'echo "Start Pipeline"'
+         }
          stage('scm_checkout') {
             steps {	
                 checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' 38927baa-2326-4b88-b640-a736577219fe', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
