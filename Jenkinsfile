@@ -22,6 +22,7 @@ pipeline {
                 bat "cd"
                 bat "copy *.txt output_${env.BUILD_NUMBER}"
                 bat "dir"
+                bat "dir"
              }
           }
           stage('scm_push') {
