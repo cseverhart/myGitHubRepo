@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('scm_checkout') {
+/*        stage('scm_checkout') {
             steps {	
                 checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' 38927baa-2326-4b88-b640-a736577219fe', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
             }
          }
- /*        stage('scm_repull') {
+         stage('scm_repull') {
             steps {
                  sh "git pull --all"
                  sh "git checkout myFirstPipeline"
