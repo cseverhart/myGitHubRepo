@@ -2,7 +2,9 @@ pipeline {
     agent any
     stages {
          stage('start_pipeline') {
-            sh 'echo "Start Pipeline"'
+            steps {
+                sh 'echo "Start Pipeline"'
+            }
          }
          stage('scm_checkout') {
             steps {	
