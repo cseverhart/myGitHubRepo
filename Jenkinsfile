@@ -32,8 +32,7 @@ pipeline {
 			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '38927baa-2326-4b88-b640-a736577219fe', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
 			    sh 'git config --global user.name "scott everhart"'
 			    sh 'git config --global user.email "scott.everhart1@gmail.com"'
-			    sh "git pull origin development"
-			    sh "git remote add origin https://github.com/scotteverhart/testJenkinsTarget.git"
+			    sh "git pull development"
 			    sh "cd"
 			    sh "cp ./output_${env.BUILD_NUMBER}/*.txt ."
 			    sh "cd"
