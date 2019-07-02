@@ -8,27 +8,21 @@ pipeline {
          }
          stage('scm_checkout') {
             steps {	
-                checkout([$class: 'GitSCM', branches: [[name: '*/myFirstPipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' 38927baa-2326-4b88-b640-a736577219fe', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' 38927baa-2326-4b88-b640-a736577219fe', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
             }
          }
-         stage('scm_repull') {
-            steps {
 
-                 sh "git pull --all"
-                 sh "git checkout myFirstPipeline"
-            }
-         }
          stage('Run_python') {
             steps {
-                sh 'c:/python27/python ./PythonProjects/src/TestModule1.py'
-            	sh "dir"
+                sh 'python ./PythonProjects/src/TestModule1.py'
+            	sh "ls -alF"
             	sh "cd"
             	sh "mkdir output_${env.BUILD_NUMBER}"
                 sh "cd output_${env.BUILD_NUMBER}"
                 sh "cd"
-                sh "copy *.txt output_${env.BUILD_NUMBER}"
-                sh "dir"
-                sh "dir"
+                sh "cp *.txt output_${env.BUILD_NUMBER}"
+                sh "ls -alF"
+                sh "ls -alF"
              }
           }
           stage('scm_push') {
@@ -40,7 +34,7 @@ pipeline {
 				    sh 'git config --global user.email "scott.everhart1@gmail.com"'
 				    sh "git pull origin development"
 				    sh "cd"
-				    sh "copy \"${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt\" ."
+				    sh "cp \"${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt\" ."
 				    sh "cd"
 				    sh "git add output_${env.BUILD_NUMBER}\\*.txt"
 				    sh "cd"
