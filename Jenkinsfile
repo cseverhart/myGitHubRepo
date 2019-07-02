@@ -13,6 +13,7 @@ pipeline {
          }
          stage('scm_repull') {
             steps {
+
                  sh "git pull --all"
                  sh "git checkout myFirstPipeline"
             }
