@@ -28,21 +28,21 @@ pipeline {
           stage('scm_push') {
              steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' 38927baa-2326-4b88-b640-a736577219fe', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
-                sh "git checkout development"
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '38927baa-2326-4b88-b640-a736577219fe', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
-				    sh 'git config --global user.name "scott everhart"'
-				    sh 'git config --global user.email "scott.everhart1@gmail.com"'
-				    sh "git pull origin Development"
-				    sh "cd"
-				    sh "cp \"${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt\" ."
-				    sh "cd"
-				    sh "git add output_${env.BUILD_NUMBER}\\*.txt"
-				    sh "cd"
-				    sh "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
-				    sh "cd"
-				    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
-				    sh "git push --tags"
-				}
+
+			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '38927baa-2326-4b88-b640-a736577219fe', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+			    sh 'git config --global user.name "scott everhart"'
+			    sh 'git config --global user.email "scott.everhart1@gmail.com"'
+			    sh "git pull origin Development"
+			    sh "cd"
+			    sh "cp \"${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt\" ."
+			    sh "cd"
+			    sh "git add output_${env.BUILD_NUMBER}\\*.txt"
+			    sh "cd"
+			    sh "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
+			    sh "cd"
+			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
+			    sh "git push --tags"
+			}
 		      }
 		   }
 		   stage('Approval') {
