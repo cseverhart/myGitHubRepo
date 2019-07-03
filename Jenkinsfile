@@ -29,7 +29,7 @@ pipeline {
              steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' 38927baa-2326-4b88-b640-a736577219fe', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
 
-			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '38927baa-2326-4b88-b640-a736577219fe', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+			//withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '38927baa-2326-4b88-b640-a736577219fe', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
 			    sh 'git config --global user.name "scott everhart"'
 			    sh 'git config --global user.email "scott.everhart1@gmail.com"'
 			    sh "git pull origin development"
@@ -42,7 +42,7 @@ pipeline {
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 			    sh "git push --tags"
-			}
+			//}
 		      }
 		   }
 		   stage('Approval') {
