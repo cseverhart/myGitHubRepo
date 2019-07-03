@@ -57,7 +57,7 @@ pipeline {
 	post {
         always {
         	echo 'archiving files'
-            archive '*.txt'
+            archiveArtifacts '*.txt'
             echo 'archiving complete'
         }
     }
