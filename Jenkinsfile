@@ -42,7 +42,7 @@ pipeline {
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 			    sh "git remote rm origin"
-			    sh "git remote add origin 'git@github.com/scotteverhart/testJenkinsTarget.git'
+			    sh "git remote add origin 'git@github.com/scotteverhart/testJenkinsTarget.git'"
 			    sh "git push --tags"
 			}
 		      }
