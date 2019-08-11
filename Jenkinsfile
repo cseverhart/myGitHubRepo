@@ -8,7 +8,7 @@ pipeline {
          }
          stage('scm_checkout') {
             steps {	
-                checkout([$class: 'GitSCM', branches: [[name: '*/Development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: ' 38927baa-2326-4b88-b640-a736577219fe', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/Development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
             }
          }
 
