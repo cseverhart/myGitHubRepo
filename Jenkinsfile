@@ -35,9 +35,7 @@ pipeline {
 			    sh "cd"
 			    sh "git add output_${env.BUILD_NUMBER}/*.txt"
 			    sh "cd"
-			    sh "git tag -a \"je                            sh 'git config --global user.name "scotteverhart"'
-33
-                            sh 'git config --global user.email "scott.everhart1@gmail.com"'nkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
+		            sh "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 		     	    sh "git remote -v"
