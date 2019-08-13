@@ -29,15 +29,15 @@ pipeline {
              steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
 
-			    sh 'git config --global user.name "scotteverhart"'
-			    sh 'git config --global user.email "scott.everhart1@gmail.com"'
 			    sh "git pull origin development"
 			    sh "cd"
 			    sh "cp ./output_${env.BUILD_NUMBER}/*.txt ."
 			    sh "cd"
 			    sh "git add output_${env.BUILD_NUMBER}/*.txt"
 			    sh "cd"
-			    sh "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
+			    sh "git tag -a \"je                            sh 'git config --global user.name "scotteverhart"'
+33
+                            sh 'git config --global user.email "scott.everhart1@gmail.com"'nkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 		     	    sh "git remote -v"
