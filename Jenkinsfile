@@ -40,8 +40,7 @@ pipeline {
 			    sh "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
-			    sh "git remote rm origin"
-			    sh "git remote set-url origin \"https://github.com/scotteverhart/testJenkinsTarget.git\""
+		     	    sh "git remote -v"
 			    sh "git push --tags"
 			
 		      }
