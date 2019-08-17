@@ -39,7 +39,7 @@ pipeline {
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 		     	    sh "git fetch"
-			    sh "git push --all"
+			    sh "git push origin development"
 			
 		      }
 		   }
