@@ -29,7 +29,7 @@ pipeline {
              steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
 
-			    sh "git pull development"
+			    sh "git pull origin development"
 		     	    sh "cd"
 			    sh "cp ./output_${env.BUILD_NUMBER}/*.txt ."
 			    sh "cd"
