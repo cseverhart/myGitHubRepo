@@ -41,7 +41,7 @@ pipeline {
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
 		     	    sh "git remote -v"
-			    sh "git push origin development--tags"
+			    sh "git push origin development --tags"
 			
 		      }
 		   }
