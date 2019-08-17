@@ -28,7 +28,7 @@ pipeline {
           stage('scm_push') {
 steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'https://github.com/scotteverhart/testJenkinsTarget.git']]])
-                sh "git checkout development"
+
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'bb6b58d8-95ee-4709-966e-09d702139ebd', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
 				    sh 'git config --global user.name "scott everhart"'
 				    sh 'git config --global user.email "scott.everhart1@gmail.com"'
