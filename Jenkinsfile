@@ -8,7 +8,7 @@ pipeline {
          }
          stage('scm_checkout') {
             steps {	
-                checkout([$class: 'GitSCM', branches: [[name: '*/Development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'git@github.com:scotteverhart/myGitHubRepo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/Development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
             }
          }
 
@@ -27,7 +27,7 @@ pipeline {
           }
           stage('scm_push') {
              steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'git@github.com:scotteverhart/testJenkinsTarget.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/development']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '40c21658-7efb-48d6-a1cb-865bd192e63b', url: 'https://github.com/scotteverhart/myGitHubRepo.git']]])
 
 			    sh "cd"
 			    sh "cp ./output_${env.BUILD_NUMBER}/*.txt ."
@@ -37,6 +37,7 @@ pipeline {
 		            sh "git tag -a \"jenkinsBuild_${env.BUILD_NUMBER}\" -m \"tag From Jenkins\""
 			    sh "cd"
 			    sh "git commit -m \"From Jenkins Pipeline Build ${env.BUILD_NUMBER}\""
+		     	    sh "git fetch"
 			    sh "git push --all"
 			
 		      }
