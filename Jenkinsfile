@@ -34,7 +34,7 @@ steps {
 				    sh 'git config --global user.email "scott.everhart1@gmail.com"'
 				    sh "git pull origin development"
 				    sh "cd"
-				    sh "copy \"${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt\" ."
+				    sh "cp \"${env.WORKSPACE}\\output_${env.BUILD_NUMBER}\\*.txt\" ."
 				    sh "cd"
 				    sh "git add output_${env.BUILD_NUMBER}\\*.txt"
 				    sh "cd"
